@@ -1,29 +1,30 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { weatherConditions } from '../utils/WeatherConditions';
 
-const Weather = ({ weather, temperature }) => {
+const Weather = ({ weather, temperature, city, valid }) => {
   return (
+    console.log(weather),
     <View
       style={[
         styles.weatherContainer,
-        { backgroundColor: weatherConditions[weather].color }
+        { backgroundColor: weatherConditions[weather].color}
       ]}
     >
       <View style={styles.headerContainer}>
         <MaterialCommunityIcons
           size={72}
           name={weatherConditions[weather].icon}
-          color={'#fff'}
+          color={'black'}
         />
         <Text style={styles.tempText}>{temperature}˚</Text>
       </View>
       <View style={styles.bodyContainer}>
-        <Text style={styles.title}>{weatherConditions[weather].title}</Text>
+        <Text style={styles.title}>{city/*weatherConditions[weather].title*/}</Text>
         <Text style={styles.subtitle}>
-          {weatherConditions[weather].subtitle}
+          {weather}
         </Text>
       </View>
     </View>
@@ -32,7 +33,9 @@ const Weather = ({ weather, temperature }) => {
 
 Weather.propTypes = {
   temperature: PropTypes.number.isRequired,
-  weather: PropTypes.string
+  weather: PropTypes.string,
+  city: PropTypes.string,
+  valid: PropTypes.number.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
   },
   tempText: {
     fontSize: 72,
-    color: '#fff'
+    color: 'black'
   },
   bodyContainer: {
     flex: 2,
@@ -58,11 +61,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 60,
-    color: '#fff'
+    color: 'black'
   },
   subtitle: {
     fontSize: 24,
-    color: '#fff'
+    color: 'black'
   }
 });
 
